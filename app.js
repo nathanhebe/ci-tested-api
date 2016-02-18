@@ -4,10 +4,9 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var config = require('nconf')
-            .argv()
-            .env()
-            .file('appConfig', __dirname + '/config/app.json' );
-
+                .argv()
+                .env()
+                .file('app', __dirname + '/config/app.json' );
 // ====================================================================
 // Body Parser
 // ====================================================================
