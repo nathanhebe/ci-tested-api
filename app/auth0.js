@@ -36,9 +36,7 @@ module.exports.currentUser = function (req, res, next) {
 
 module.exports.authenticateEndpoint = function (req, res, next) {
     if (!req.currentUser) {
-        return res.json(401, {
-            message: 'You must be signed in to continue.'
-        });
+        return res.send(401,'You must be signed in to continue');
     }
 };
 
