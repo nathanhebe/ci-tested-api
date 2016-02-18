@@ -38,3 +38,11 @@ module.exports.currentUser = function (app) {
     });
 };
 
+module.exports.authenticateEndpoint = function (req, res, next) {
+    if (!req.currentUser) {
+        return res.json(401, {
+            message: 'You must be signed in to continue.'
+        });
+    }
+};
+

@@ -3,25 +3,25 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var config = require('nconf').argv().env().file({ file:  __dirname + '/config/env.json' });
+var config = require('nconf').argv().env().file({ file: __dirname + '/config/env.json' });
 
 // ====================================================================
 // Load Configs
 // ====================================================================
 nconf.argv()
-   .env()
-   .file({ file: 'configs/app_config.json' });
+    .env()
+    .file({ file: 'configs/app_config.json' });
 
 // ====================================================================
 // Body Parser
 // ====================================================================
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 app.use(bodyParser.json({
-  type: function(req){
-    return true;
-  }
+    type: function (req) {
+        return true;
+    }
 }));
 
 // ====================================================================
@@ -33,8 +33,8 @@ app.use(cors(corsOptions));
 // ====================================================================
 // APP Version Header
 // ====================================================================
-app.get('/*',function(req,res,next){
-    res.header(config.get('app:name') , config.get('app:version'));
+app.get('/*', function (req, res, next) {
+    res.header(config.get('app:name'), config.get('app:version'));
     next();
 });
 
@@ -45,16 +45,23 @@ var auth0Middleware = require('./app/auth0');
 app.use(auth0Middleware.authentication(app));
 app.user(auth0Middleware.currentUser(app));
 
+// ====================================================================
+// Routes
+// ====================================================================
+require('./app/routes.js')(app);
 
 
-app.get('/', function(req, res){
-  res.send('Hello World');
+app.get('/', function (req, res) {
+    res.send('Hello World');
 });
 
-var server = app.listen(3000, function(){
-  console.log('Magic is happening on port 3000');
+// =============================================================================
+// Go!
+// =============================================================================
+var port = process.env.PORT || 3000;
+var server = app.listen(port, function () {
+    console.log('Magic is happening on port ' + port);
 });
-
-module.exports.closeServer = function(){
-  server.close();
+module.exports.closeServer = function () {
+    server.close();
 };
