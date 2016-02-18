@@ -4,8 +4,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var config = require('nconf').argv().env().file({ file:  __dirname + '/config/env.json' });
-var JSONWebTokenMiddleware = require('express-jwt');
-var Auth0Client = require('auth0').ManagementClient;
 var nconf = require('nconf');
 
 // ====================================================================
@@ -41,7 +39,12 @@ app.get('/*',function(req,res,next){
     next();
 });
 
-
+// ====================================================================
+// Authentication
+// ====================================================================
+var auth0Middleware = require('./app/auth0');
+app.use(auth0Middleware.authentication);
+app.user(auth0Middleware.currentUser);
 
 
 
