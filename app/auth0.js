@@ -1,6 +1,9 @@
 var JSONWebTokenMiddleware = require('express-jwt');
 var Auth0Client = require('auth0').ManagementClient;
-var config = require('nconf').argv().env().file('corsWhitelist', __dirname + '/../config/env.json');
+var config = require('nconf')
+            .argv()
+            .env()
+            .file('appConfig', __dirname + '/config/auth0.json' );
 
 var auth = new Auth0Client({
     token: config.get('AUTH0_TOKEN'),

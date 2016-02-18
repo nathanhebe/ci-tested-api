@@ -3,7 +3,10 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var config = require('nconf').argv().env().file({ file: __dirname + '/config/env.json' });
+var config = require('nconf')
+            .argv()
+            .env()
+            .file('appConfig', __dirname + '/config/app.json' );
 
 // ====================================================================
 // Body Parser
@@ -27,7 +30,7 @@ app.use(cors(corsOptions));
 // APP Version Header
 // ====================================================================
 app.get('/*', function (req, res, next) {
-    res.header(config.get('app:name'), config.get('app:version'));
+    res.header(config.get('app_name'), config.get('app_version'));
     next();
 });
 

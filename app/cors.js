@@ -1,7 +1,11 @@
 var corsOptions = {};
-var nconf = require('nconf').argv().env().file('corsWhitelist', __dirname + '/../config/cors_whitelist.json');
+var config = require('nconf')
+            .argv()
+            .env()
+            .file('appConfig', __dirname + '/config/cors_whitelist.json' );
+
   
-var corsOrigins =   nconf.get('cors_rules');
+var corsOrigins =   config.get('cors_rules');
 for (var i = 0; i < corsOrigins.length; i++) {
   var element = corsOrigins[i];
   if(element.indexOf('REGEX') == 0) {
