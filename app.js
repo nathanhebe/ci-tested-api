@@ -4,7 +4,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var config = require('nconf').argv().env().file({ file:  __dirname + '/config/env.json' });
-var nconf = require('nconf');
 
 // ====================================================================
 // Load Configs
@@ -35,7 +34,7 @@ app.use(cors(corsOptions));
 // APP Version Header
 // ====================================================================
 app.get('/*',function(req,res,next){
-    res.header(nconf.get('app:name') , nconf.get('app:version'));
+    res.header(config.get('app:name') , config.get('app:version'));
     next();
 });
 
@@ -43,8 +42,8 @@ app.get('/*',function(req,res,next){
 // Authentication
 // ====================================================================
 var auth0Middleware = require('./app/auth0');
-app.use(auth0Middleware.authentication);
-app.user(auth0Middleware.currentUser);
+app.use(auth0Middleware.authentication(app));
+app.user(auth0Middleware.currentUser(app));
 
 
 
