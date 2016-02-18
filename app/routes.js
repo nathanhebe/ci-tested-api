@@ -1,5 +1,5 @@
 module.exports = function (app, mongoDB) {
-    var authenticated = require('./routes/authenticated')
+    var authenticated = require('./routes/authenticated')();
 	app.use('/authenticated', authenticated);
 
 	// var canvases = require('./routes/canvases.js')(mongoDB);

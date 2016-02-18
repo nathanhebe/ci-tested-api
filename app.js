@@ -6,13 +6,6 @@ var cors = require('cors');
 var config = require('nconf').argv().env().file({ file: __dirname + '/config/env.json' });
 
 // ====================================================================
-// Load Configs
-// ====================================================================
-nconf.argv()
-    .env()
-    .file({ file: 'configs/app_config.json' });
-
-// ====================================================================
 // Body Parser
 // ====================================================================
 app.use(bodyParser.urlencoded({
@@ -42,8 +35,8 @@ app.get('/*', function (req, res, next) {
 // Authentication
 // ====================================================================
 var auth0Middleware = require('./app/auth0');
-app.use(auth0Middleware.authentication(app));
-app.user(auth0Middleware.currentUser(app));
+app.use(auth0Middleware.authentication);
+app.use(auth0Middleware.currentUser);
 
 // ====================================================================
 // Routes
