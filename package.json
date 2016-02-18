@@ -1,0 +1,26 @@
+{
+  "name": "ci-tested-api",
+  "version": "1.0.0",
+  "description": "A test for a NodeJS API using ExpressJS with Testing &amp; integrating with TravisCI",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanhebe/ci-tested-api.git"
+  },
+  "author": "Nathan Smith",
+  "license": "EPL-1.0",
+  "bugs": {
+    "url": "https://github.com/nathanhebe/ci-tested-api/issues"
+  },
+  "homepage": "https://github.com/nathanhebe/ci-tested-api#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
+    "express": "^4.13.4",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  }
+}
